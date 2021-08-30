@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>440</width>
+    <height>320</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Panther Lock Hunter</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/app.ico</normaloff>:/icons/app.ico</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabParent">
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>16</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <widget class="TabMain" name="tabMain">
+       <attribute name="title">
+        <string>Main</string>
+       </attribute>
+      </widget>
+      <widget class="TabLog" name="tabLog">
+       <attribute name="title">
+        <string>Log</string>
+       </attribute>
+      </widget>
+      <widget class="TabSetting" name="tabSetting">
+       <attribute name="title">
+        <string>Setting</string>
+       </attribute>
+      </widget>
+      <widget class="TabAbout" name="tabAbout">
+       <attribute name="title">
+        <string>About</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TabMain</class>
+   <extends>QWidget</extends>
+   <header>tabmain.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TabLog</class>
+   <extends>QWidget</extends>
+   <header>tablog.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TabSetting</class>
+   <extends>QWidget</extends>
+   <header>tabsetting.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TabAbout</class>
+   <extends>QWidget</extends>
+   <header>tababout.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

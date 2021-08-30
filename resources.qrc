@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/app.ico</file>
+        <file>icons/add.svg</file>
+        <file>icons/delete.svg</file>
+        <file>icons/green.svg</file>
+        <file>icons/red.svg</file>
+        <file>icons/target.svg</file>
+        <file>icons/trash.svg</file>
+        <file>icons/app.svg</file>
+        <file>icons/scan.svg</file>
+        <file>icons/minus.svg</file>
+        <file>icons/plus.svg</file>
+        <file>icons/reset.svg</file>
+        <file>icons/yellow.svg</file>
+    </qresource>
+</RCC>

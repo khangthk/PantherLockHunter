@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TabSetting</class>
+ <widget class="QWidget" name="TabSetting">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>440</width>
+    <height>270</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="checkBoxRunOnSystemStartup">
+       <property name="text">
+        <string>Run on system startup</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QCheckBox" name="checkBoxMoveToTrash">
+       <property name="text">
+        <string>Move to trash</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="checkBoxHideWindowAtLaunch">
+       <property name="text">
+        <string>Hide window at launch</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayoutGrid">
+       <item>
+        <widget class="QCheckBox" name="checkBoxAutoClearLog">
+         <property name="text">
+          <string>Auto clear log after:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxHours">
+         <property name="currentText">
+          <string>4 hours</string>
+         </property>
+         <property name="currentIndex">
+          <number>3</number>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>1 hour</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2 hours</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>3 hours</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4 hours</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>5 hours</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>6 hours</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>7 hours</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>8 hours</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>9 hours</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>10 hours</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>11 hours</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>12 hours</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacerGrid">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="checkBoxAutoStartHunter">
+       <property name="text">
+        <string>Auto start hunter</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Lock File</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QListWidget" name="listWidget"/>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayoutButton">
+        <item>
+         <widget class="QPushButton" name="buttonAdd">
+          <property name="text">
+           <string>Add</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/plus.svg</normaloff>:/icons/plus.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="buttonDelete">
+          <property name="text">
+           <string>Delete</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/minus.svg</normaloff>:/icons/minus.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="buttonDefault">
+          <property name="text">
+           <string>Default</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/reset.svg</normaloff>:/icons/reset.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacerButton">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>checkBoxRunOnSystemStartup</tabstop>
+  <tabstop>checkBoxHideWindowAtLaunch</tabstop>
+  <tabstop>checkBoxAutoStartHunter</tabstop>
+  <tabstop>checkBoxMoveToTrash</tabstop>
+  <tabstop>checkBoxAutoClearLog</tabstop>
+  <tabstop>comboBoxHours</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>buttonAdd</tabstop>
+  <tabstop>buttonDelete</tabstop>
+  <tabstop>buttonDefault</tabstop>
+ </tabstops>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
