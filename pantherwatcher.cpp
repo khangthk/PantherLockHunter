@@ -25,8 +25,6 @@ void PantherWatcher::start()
     m_watcher->watch();
 
     connect(m_listener, &PantherWatchListener::fileDelete, this, &PantherWatcher::onFileDelete);
-    connect(this, &PantherWatcher::updateLockFiles, m_listener, &PantherWatchListener::onUpdateLockFiles);
-    connect(this, &PantherWatcher::moveToTrash, m_listener, &PantherWatchListener::onMoveToTrash);
 }
 
 void PantherWatcher::stop()
@@ -71,10 +69,10 @@ int PantherWatcher::getTotalFileDeleted()
 void PantherWatcher::onFileDelete(const QString &path, const bool success)
 {
     QString log = "Found: " + path;
-    emit appendLog(log);
+    emit addLog(log);
     qDebug() << log;
     log = success ? "->Deleted successfully!" : "->Delete failed!";
-    emit appendLog(log);
+    emit addLog(log);
     qDebug() << log;
     if (success) {
         ++m_totalFileDeleted;
@@ -83,12 +81,12 @@ void PantherWatcher::onFileDelete(const QString &path, const bool success)
     }
 }
 
-void PantherWatcher::onUpdateLockFiles()
+void PantherWatcher::onInitLockFileList()
 {
-    emit updateLockFiles();
+    m_listener->initLockFileList();
 }
 
-void PantherWatcher::onMoveToTrash()
+void PantherWatcher::onMoveLockFileToTrash()
 {
-    emit moveToTrash();
+    m_listener->moveLockFileToTrash();
 }

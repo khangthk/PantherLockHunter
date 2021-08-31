@@ -17,13 +17,15 @@ public:
     ~TabLog();
 
 public slots:
+    void onAddLog(const QString &log);
+    void onInitTimerClearLog();
+
+private slots:
     void onClear();
-    void onAppendLog(const QString &log);
-    void onClearLogTimer();
 
 private:
     Ui::TabLog *ui;
-    QTimer m_clearLogTimer;
+    QTimer m_timerClearLog;
 };
 
 #endif // TABLOG_H

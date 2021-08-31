@@ -19,10 +19,9 @@ protected:
     void showEvent(QShowEvent *event) override;
 
 signals:
-    void updateLockFiles();
-    void updateStatusBar();
-    void moveToTrash();
-    void setupClearLogTimer();
+    void moveLockFileToTrash();
+    void initTimerClearLog();
+    void numberItemOfListChanged(); // send this signal to update status bar green or yellow
 
 private slots:
     void onRunOnSystemStartup(int state);
@@ -34,13 +33,13 @@ private slots:
     void onAdd();
     void onDelete();
     void onDefault();
-    void onItemSelectionChanged();
+    void onListIndexChanged();
 
 private:
     Ui::TabSetting *ui;
 
     void initData();
-    void updateButtonState();
+    void updateButtonDeleteState();
 };
 
 #endif // TABSETTING_H

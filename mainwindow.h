@@ -10,6 +10,7 @@
 #include "tabsetting.h"
 #include "tababout.h"
 #include "systemtray.h"
+#include "pantherwatcher.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,20 +31,24 @@ protected:
     void closeEvent(QCloseEvent *event) override;
 
 signals:
-    void autoStartHunter();
-    void updateStatusBar();
-    void setupClearLogTimer();
+    void statusOfWatcherChanged(const bool isRunning);
 
 public slots:
-    void onUpdateStatusBar(const bool running, const int totalFileDeleted);
-    void onMessageReceived(const QString &mess);
+    void onSingleApplicationMessageReceived(const QString &message);
+
+private slots:
+    void onAddWatch(const QString &dir);
+    void onDeleteWatch(const QStringList &listDir);
+    void onStartWatcher();
+    void onUpdateStatusBar();
 
 private:
     Ui::MainWindow *ui;
     QLabel *m_statusIcon;
     QLabel *m_statusText;
     QLabel *m_totalFile;
-    SystemTray *m_sysTray;
     QTimer m_timer;
+    SystemTray *m_sysTray;
+    PantherWatcher *m_watcher;
 };
 #endif // MAINWINDOW_H

@@ -21,21 +21,21 @@ void TabLog::onClear()
     ui->plainTextEdit->clear();
 }
 
-void TabLog::onAppendLog(const QString &log)
+void TabLog::onAddLog(const QString &log)
 {
     ui->plainTextEdit->moveCursor(QTextCursor::End);
     ui->plainTextEdit->insertPlainText(log);
     ui->plainTextEdit->appendPlainText("");
 }
 
-void TabLog::onClearLogTimer()
+void TabLog::onInitTimerClearLog()
 {
-    m_clearLogTimer.stop();
+    m_timerClearLog.stop();
 
     if (Setting::getAutoClearLog()) {
-        QObject::connect(&m_clearLogTimer, &QTimer::timeout, [&](){
+        QObject::connect(&m_timerClearLog, &QTimer::timeout, [&](){
             onClear();
         });
-        m_clearLogTimer.start(1000 * 60 * 60 * Setting::getClearLogHours());
+        m_timerClearLog.start(1000 * 60 * 60 * Setting::getClearLogHours());
     }
 }

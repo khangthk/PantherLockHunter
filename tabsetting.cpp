@@ -20,7 +20,7 @@ TabSetting::TabSetting(QWidget *parent) :
     connect(ui->buttonAdd, &QAbstractButton::clicked, this, &TabSetting::onAdd);
     connect(ui->buttonDelete, &QAbstractButton::clicked, this, &TabSetting::onDelete);
     connect(ui->buttonDefault, &QAbstractButton::clicked, this, &TabSetting::onDefault);
-    connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &TabSetting::onItemSelectionChanged);
+    connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &TabSetting::onListIndexChanged);
 }
 
 TabSetting::~TabSetting()
@@ -31,7 +31,7 @@ TabSetting::~TabSetting()
 void TabSetting::showEvent(QShowEvent *event)
 {
     QWidget::showEvent(event);
-    updateButtonState();
+    updateButtonDeleteState();
 }
 
 void TabSetting::onRunOnSystemStartup(int state)
@@ -56,20 +56,20 @@ void TabSetting::onAutoStartHunter(int state)
 void TabSetting::onMoveToTrash(int state)
 {
     Setting::setMoveToTrash(state != 0);
-    emit moveToTrash()
-        ;}
+    emit moveLockFileToTrash();
+}
 
 void TabSetting::onAutoClearLog(int state)
 {
     Setting::setAutoClearLog(state != 0);
-    emit setupClearLogTimer();
+    emit initTimerClearLog();
 }
 
 void TabSetting::onHoursIndexChanged(int index)
 {
     Setting::setClearLogHours(index + 1);
     if (Setting::getAutoClearLog()) {
-        emit setupClearLogTimer();
+        emit initTimerClearLog();
     }
 }
 
@@ -93,12 +93,12 @@ void TabSetting::onAdd()
                 files << ui->listWidget->item(i)->text();
             }
             Setting::setLockFiles(files);
+
+            emit numberItemOfListChanged();
         }
     }
 
-    emit updateLockFiles();
-    emit updateStatusBar();
-    updateButtonState();
+    onListIndexChanged();
 }
 
 void TabSetting::onDelete()
@@ -109,15 +109,18 @@ void TabSetting::onDelete()
         delete ui->listWidget->takeItem(ui->listWidget->row(item));
     }
 
-    QStringList files;
-    for (int i = 0; i < ui->listWidget->count(); i++) {
-        files << ui->listWidget->item(i)->text();
-    }
-    Setting::setLockFiles(files);
+    if (!items.empty()) {
+        // Update the lock file list
+        QStringList files;
+        for (int i = 0; i < ui->listWidget->count(); i++) {
+            files << ui->listWidget->item(i)->text();
+        }
+        Setting::setLockFiles(files);
 
-    emit updateLockFiles();
-    emit updateStatusBar();
-    updateButtonState();
+        emit numberItemOfListChanged();
+    }
+
+    onListIndexChanged();
 }
 
 void TabSetting::onDefault()
@@ -127,14 +130,13 @@ void TabSetting::onDefault()
     qDebug() << "Default lock file";
     Setting::setLockFiles(Setting::getDefaultLockFiles());
 
-    emit updateLockFiles();
-    emit updateStatusBar();
-    updateButtonState();
+    emit numberItemOfListChanged();
+    updateButtonDeleteState();
 }
 
-void TabSetting::onItemSelectionChanged()
+void TabSetting::onListIndexChanged()
 {
-    updateButtonState();
+    updateButtonDeleteState();
 }
 
 void TabSetting::initData()
@@ -160,9 +162,7 @@ void TabSetting::initData()
     ui->listWidget->addItems(Setting::getLockFiles());
 }
 
-void TabSetting::updateButtonState()
+void TabSetting::updateButtonDeleteState()
 {
     ui->buttonDelete->setEnabled(!ui->listWidget->selectedItems().empty());
 }
-
-

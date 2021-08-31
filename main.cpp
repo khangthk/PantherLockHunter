@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     w.starHunter(Setting::getAutoStartHunter());
 
     a.setActivationWindow(&w);
-    QObject::connect(&a, &SharedTools::QtSingleApplication::messageReceived, &w, &MainWindow::onMessageReceived);
+    QObject::connect(&a, &SharedTools::QtSingleApplication::messageReceived, &w, &MainWindow::onSingleApplicationMessageReceived);
 
     return a.exec();
 }

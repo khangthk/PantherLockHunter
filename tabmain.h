@@ -1,8 +1,6 @@
 #ifndef TABMAIN_H
 #define TABMAIN_H
 
-#include "pantherwatcher.h"
-
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -17,38 +15,30 @@ public:
     explicit TabMain(QWidget *parent = nullptr);
     ~TabMain();
 
-    PantherWatcher *getWatcher() const;
+protected:
+    void showEvent(QShowEvent *event) override;
 
 signals:
-    void updateStatusBar(const bool running, const int numFileDeleted);
-    void appendLog(const QString &log);
-    void updateLockFiles();
-    void moveToTrash();
+    void addWatch(const QString &dir);
+    void deleteWatch(const QStringList &listDir);
+    void startWatcher();
+    void numberItemOfListChanged(); // send this signal to update status bar green or yellow
 
 public slots:
-    void onTotalFileDeleteChanged();
-    void onUpdateLockFiles();
-    void onAutoStartHunter();
-    void onUpdateStatusBar();
-    void onMoveToTrash();
+    void onStatusOfWatcherChanged(const bool isRunning);
 
 private slots:
     void onAdd();
     void onDelete();
     void onStart();
     void onScan();
-    void onItemSelectionChanged();
-    void onAppendLog(const QString &log);
-
-protected:
-    void showEvent(QShowEvent *event) override;
+    void onListIndexChanged();
 
 private:
     Ui::TabMain *ui;
-    PantherWatcher *m_watcher;
 
-    void updateButtonState();
-    void getPantherSiteList(QStringList &list);
+    void updateButtonDeleteState();
+    void updateButtonScanState();
 };
 
 #endif // TABMAIN_H

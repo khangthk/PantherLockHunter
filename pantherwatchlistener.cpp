@@ -13,8 +13,8 @@
 
 PantherWatchListener::PantherWatchListener(QObject *parent) : QObject(parent)
 {
-    onUpdateLockFiles();
-    onMoveToTrash();
+    initLockFileList();
+    moveLockFileToTrash();
 }
 
 void PantherWatchListener::handleFileAction(efsw::WatchID watchID, const std::string &dir, const std::string &filename,
@@ -49,12 +49,12 @@ void PantherWatchListener::handleFileAction(efsw::WatchID watchID, const std::st
     }
 }
 
-void PantherWatchListener::onUpdateLockFiles()
+void PantherWatchListener::initLockFileList()
 {
     m_lockFiles = Setting::getLockFiles();
 }
 
-void PantherWatchListener::onMoveToTrash()
+void PantherWatchListener::moveLockFileToTrash()
 {
     m_moveToTrash = Setting::getMoveToTrash();
 }

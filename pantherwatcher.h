@@ -22,15 +22,13 @@ public:
     int getTotalFileDeleted();
 
 signals:
-    void appendLog(const QString &log);
+    void addLog(const QString &log);
     void totalFileDeleteChanged();
-    void updateLockFiles();
-    void moveToTrash();
 
 public slots:
     void onFileDelete(const QString &path, const bool success);
-    void onUpdateLockFiles();
-    void onMoveToTrash();
+    void onInitLockFileList();
+    void onMoveLockFileToTrash();
 
 private:
     efsw::FileWatcher *m_watcher;
