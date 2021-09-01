@@ -95,11 +95,11 @@ void TabMain::onScan()
 
 void TabMain::onListIndexChanged()
 {
-    updateButtonDeleteState();
-    updateButtonScanState();
+    updateButtonDelete();
+    updateButtonScan();
 }
 
-void TabMain::onStatusOfWatcherChanged(const bool isRunning)
+void TabMain::onUpdateButtonStart(const bool isRunning)
 {
     if (isRunning) {
         ui->buttonStart->setText("Stop");
@@ -110,12 +110,12 @@ void TabMain::onStatusOfWatcherChanged(const bool isRunning)
     }
 }
 
-void TabMain::updateButtonDeleteState()
+void TabMain::updateButtonDelete()
 {
     ui->buttonDelete->setEnabled(!ui->listWidget->selectedItems().empty());
 }
 
-void TabMain::updateButtonScanState()
+void TabMain::updateButtonScan()
 {
     ui->buttonScan->setEnabled(ui->listWidget->count() > 0);
 }

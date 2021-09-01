@@ -20,7 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statusbar->addPermanentWidget(m_statusText, 1);
     ui->statusbar->addPermanentWidget(m_totalFile, 2);
 
-    connect(this, &MainWindow::statusOfWatcherChanged, ui->tabMain, &TabMain::onStatusOfWatcherChanged);
+    connect(this, &MainWindow::statusOfWatcherChanged, ui->tabMain, &TabMain::onUpdateButtonStart);
+    connect(this, &MainWindow::statusOfWatcherChanged, this, &MainWindow::onUpdateStatusBar);
 
     connect(m_watcher, &PantherWatcher::addLog, ui->tabLog, &TabLog::onAddLog);
     connect(m_watcher, &PantherWatcher::totalFileDeleteChanged, this, &MainWindow::onUpdateStatusBar);
@@ -68,15 +69,12 @@ void MainWindow::onUpdateStatusBar()
                 QString text = "Hunting";
                 switch (i++) {
                 case 0:
-                    break;
-                    text += " --";
-                case 1:
                     text += " -\\-";
                     break;
-                case 2:
+                case 1:
                     text += " -|-";
                     break;
-                case 3:
+                case 2:
                     text += " -/-";
                     break;
                 default:

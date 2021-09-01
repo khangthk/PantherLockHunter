@@ -25,7 +25,7 @@ signals:
     void numberItemOfListChanged(); // send this signal to update status bar green or yellow
 
 public slots:
-    void onStatusOfWatcherChanged(const bool isRunning);
+    void onUpdateButtonStart(const bool isRunning);
 
 private slots:
     void onAdd();
@@ -37,8 +37,8 @@ private slots:
 private:
     Ui::TabMain *ui;
 
-    void updateButtonDeleteState();
-    void updateButtonScanState();
+    void updateButtonDelete();
+    void updateButtonScan();
 };
 
 #endif // TABMAIN_H
