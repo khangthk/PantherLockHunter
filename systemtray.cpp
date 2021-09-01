@@ -78,5 +78,6 @@ void SystemTray::createMenuIcon()
     m_trayIcon = new QSystemTrayIcon(this);
     m_trayIcon->setContextMenu(m_trayIconMenu);
     m_trayIcon->setIcon(QIcon(":/icons/app.ico"));
+    m_trayIcon->setToolTip("Panther Lock Hunter");
     m_trayIcon->show();
 }
