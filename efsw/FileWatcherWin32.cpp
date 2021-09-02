@@ -80,8 +80,7 @@ WatchID FileWatcherWin32::addWatch(const std::string& directory, FileWatchListen
 	watch->Watch->Watch = this;
 	watch->Watch->Listener = watcher;
 	watch->Watch->DirName = new char[dir.length()+1];
-    //memcpy(watch->Watch->DirName, dir.c_str(), dir.length());
-    strcpy(watch->Watch->DirName, dir.c_str());
+    memcpy(watch->Watch->DirName, dir.c_str(), dir.length());
 
 	mWatches.insert( watch );
 
