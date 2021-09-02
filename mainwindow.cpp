@@ -64,7 +64,7 @@ void MainWindow::onUpdateStatusBar()
         m_statusText->setText("Hunting");
 
         if (!m_timer.isActive()) {
-            QObject::connect(&m_timer, &QTimer::timeout, [&](){
+            connect(&m_timer, &QTimer::timeout, [&](){
                 static int i = 0;
                 QString text = "Hunting";
                 switch (i++) {
@@ -85,10 +85,11 @@ void MainWindow::onUpdateStatusBar()
                 m_statusText->setText(text);
             });
 
-            m_timer.start(100);
+            m_timer.start(150);
         }
     } else {
         m_timer.stop();
+        disconnect(&m_timer, &QTimer::timeout, 0, 0);
 
         QPixmap pixmap(QPixmap(":/icons/red.svg").scaledToHeight(ui->statusbar->height() / 2));
         m_statusIcon->setPixmap(pixmap);
