@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
 
-VERSION = 1.0.0
+VERSION = 1.0.1
 RC_ICONS = icons/app.ico
 QMAKE_TARGET_COMPANY = "Med-Aid"
 QMAKE_TARGET_PRODUCT = "Panther Lock Hunter"
