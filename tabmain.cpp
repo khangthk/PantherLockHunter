@@ -6,14 +6,13 @@
 #include <QDir>
 #include <QDirIterator>
 #include <QFileDialog>
+#include <QtConcurrent>
 
 TabMain::TabMain(QWidget *parent) :
-    QWidget(parent), ui(new Ui::TabMain)
+    QWidget(parent), ui(new Ui::TabMain), m_isScanning(false), m_scanLockFile(nullptr)
 {
     ui->setupUi(this);
-
     ui->listWidget->addItems(Setting::getWatchFolders());
-    ui->buttonScan->hide(); //TODO
 
     connect(ui->buttonAdd, &QAbstractButton::clicked, this, &TabMain::onAdd);
     connect(ui->buttonDelete, &QAbstractButton::clicked, this, &TabMain::onDelete);
@@ -25,6 +24,11 @@ TabMain::TabMain(QWidget *parent) :
 TabMain::~TabMain()
 {
     delete ui;
+}
+
+bool TabMain::scanning() const
+{
+    return m_isScanning;
 }
 
 void TabMain::showEvent(QShowEvent *event)
@@ -90,13 +94,35 @@ void TabMain::onStart()
 
 void TabMain::onScan()
 {
-    //TODO
+    if (!m_isScanning) {
+        m_isScanning = true;
+        m_scanLockFile = new ScanLockFile(this);
+
+        connect(m_scanLockFile, &ScanLockFile::scanDone, this, &TabMain::onScanLockFileDone);
+        connect(m_scanLockFile, &ScanLockFile::finished, m_scanLockFile, &QObject::deleteLater);
+
+        m_scanLockFile->start();
+        emit startScan();
+    } else {
+        m_isScanning = false;
+        m_scanLockFile->cancel();
+        m_scanLockFile->wait();
+    }
+
+    updateButtonScan();
 }
 
 void TabMain::onListIndexChanged()
 {
     updateButtonDelete();
     updateButtonScan();
+}
+
+void TabMain::onScanLockFileDone(const int numberFilesDeleted, const QStringList &details)
+{
+    m_isScanning = false;
+    updateButtonScan();
+    emit scanDone(numberFilesDeleted, details);
 }
 
 void TabMain::onUpdateButtonStart(const bool isRunning)
@@ -118,4 +144,11 @@ void TabMain::updateButtonDelete()
 void TabMain::updateButtonScan()
 {
     ui->buttonScan->setEnabled(ui->listWidget->count() > 0);
+    if (m_isScanning) {
+        ui->buttonScan->setText("Cancel");
+        ui->buttonScan->setToolTip("Cancel scanning");
+    } else {
+        ui->buttonScan->setText("Scan");
+        ui->buttonScan->setToolTip("Scan and delete the lock files in Panther sites");
+    }
 }

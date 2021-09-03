@@ -3,6 +3,7 @@
 
 #include <QLabel>
 #include <QMainWindow>
+#include <QProgressBar>
 #include <QTimer>
 
 #include "tabmain.h"
@@ -40,13 +41,19 @@ private slots:
     void onAddWatch(const QString &dir);
     void onDeleteWatch(const QStringList &listDir);
     void onStartWatcher();
-    void onUpdateStatusBar();
+    void onUpdateHunterStatus();
+    void onUpdateTotalDeletedStatus();
+    void onUpdateScanProgressBar();
+    void onScanStarted();
+    void onScanDone(const int numberFilesDeleted, const QStringList &details);
 
 private:
     Ui::MainWindow *ui;
     QLabel *m_statusIcon;
     QLabel *m_statusText;
     QLabel *m_totalFile;
+    QLabel *m_empty;
+    QProgressBar *m_scanProgressBar;
     QTimer m_timer;
     SystemTray *m_sysTray;
     PantherWatcher *m_watcher;

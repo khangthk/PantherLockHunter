@@ -1,6 +1,8 @@
 #ifndef TABMAIN_H
 #define TABMAIN_H
 
+#include "scanlockfile.h"
+
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -15,6 +17,8 @@ public:
     explicit TabMain(QWidget *parent = nullptr);
     ~TabMain();
 
+    bool scanning() const;
+
 protected:
     void showEvent(QShowEvent *event) override;
 
@@ -23,6 +27,8 @@ signals:
     void deleteWatch(const QStringList &listDir);
     void startWatcher();
     void numberItemOfListChanged(); // send this signal to update status bar green or yellow
+    void startScan();
+    void scanDone(const int numberFilesDeleted, const QStringList &details);
 
 public slots:
     void onUpdateButtonStart(const bool isRunning);
@@ -33,9 +39,12 @@ private slots:
     void onStart();
     void onScan();
     void onListIndexChanged();
+    void onScanLockFileDone(const int numberFilesDeleted, const QStringList &details);
 
 private:
     Ui::TabMain *ui;
+    bool m_isScanning;
+    ScanLockFile *m_scanLockFile;
 
     void updateButtonDelete();
     void updateButtonScan();

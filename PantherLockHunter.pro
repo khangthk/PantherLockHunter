@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,6 +25,7 @@ SOURCES += \
     mainwindow.cpp \
     pantherwatcher.cpp \
     pantherwatchlistener.cpp \
+    scanlockfile.cpp \
     setting.cpp \
     systemtray.cpp \
     tababout.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     pantherwatcher.h \
     pantherwatchlistener.h \
     pch.h \
+    scanlockfile.h \
     setting.h \
     systemtray.h \
     tababout.h \

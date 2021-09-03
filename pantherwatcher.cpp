@@ -83,10 +83,14 @@ void PantherWatcher::onFileDelete(const QString &path, const bool success)
 
 void PantherWatcher::onInitLockFileList()
 {
-    m_listener->initLockFileList();
+    if (isRunning()) {
+        m_listener->initLockFileList();
+    }
 }
 
 void PantherWatcher::onMoveLockFileToTrash()
 {
-    m_listener->moveLockFileToTrash();
+    if (isRunning()) {
+        m_listener->moveLockFileToTrash();
+    }
 }
