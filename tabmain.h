@@ -32,6 +32,7 @@ signals:
 
 public slots:
     void onUpdateButtonStart(const bool isRunning);
+    void onUpdateButtonScan();
 
 private slots:
     void onAdd();

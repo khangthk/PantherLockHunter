@@ -136,6 +136,11 @@ void TabMain::onUpdateButtonStart(const bool isRunning)
     }
 }
 
+void TabMain::onUpdateButtonScan()
+{
+    updateButtonScan();
+}
+
 void TabMain::updateButtonDelete()
 {
     ui->buttonDelete->setEnabled(!ui->listWidget->selectedItems().empty());
@@ -143,7 +148,7 @@ void TabMain::updateButtonDelete()
 
 void TabMain::updateButtonScan()
 {
-    ui->buttonScan->setEnabled(ui->listWidget->count() > 0);
+    ui->buttonScan->setEnabled(!Setting::getWatchFolders().empty() && !Setting::getLockFiles().empty());
     if (m_isScanning) {
         ui->buttonScan->setText("Cancel");
         ui->buttonScan->setToolTip("Cancel scanning");

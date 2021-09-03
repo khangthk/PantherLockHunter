@@ -48,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->tabSetting, &TabSetting::initTimerClearLog, ui->tabLog, &TabLog::onInitTimerClearLog);
     connect(ui->tabSetting, &TabSetting::numberItemOfListChanged, this, &MainWindow::onUpdateHunterStatus);
     connect(ui->tabSetting, &TabSetting::numberItemOfListChanged, m_watcher, &PantherWatcher::onInitLockFileList);
+    connect(ui->tabSetting, &TabSetting::numberItemOfListChanged, ui->tabMain, &TabMain::onUpdateButtonScan);
 }
 
 MainWindow::~MainWindow()
