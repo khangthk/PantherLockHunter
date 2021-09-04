@@ -203,6 +203,10 @@ void MainWindow::onScanStarted()
 
 void MainWindow::onScanDone(const int numberFilesDeleted, const QStringList &details)
 {
+    if (!isVisible()) {
+        showNormal();
+    }
+
     onUpdateScanProgressBar();
 
     if (details.empty()) {
