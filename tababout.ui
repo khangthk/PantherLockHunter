@@ -81,6 +81,13 @@
     </layout>
    </item>
    <item>
+    <widget class="QLabel" name="openSourceSW">
+     <property name="text">
+      <string>Open source software used in application:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QTextBrowser" name="textBrowser">
      <property name="html">
       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
