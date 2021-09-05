@@ -13,7 +13,10 @@
 #include <QLabel>
 #include <QMainWindow>
 #include <QMenu>
+#include <QMessageBox>
+#include <QMutex>
 #include <QObject>
+#include <QProgressBar>
 #include <QSettings>
 #include <QString>
 #include <QStringList>
