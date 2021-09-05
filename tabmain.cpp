@@ -6,7 +6,6 @@
 #include <QDir>
 #include <QDirIterator>
 #include <QFileDialog>
-#include <QtConcurrent>
 
 TabMain::TabMain(QWidget *parent) :
     QWidget(parent), ui(new Ui::TabMain), m_isScanning(false), m_scanLockFile(nullptr)
