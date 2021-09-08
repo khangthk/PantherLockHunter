@@ -8,7 +8,7 @@ TabAbout::TabAbout(QWidget *parent) :
     ui(new Ui::TabAbout)
 {
     ui->setupUi(this);
-    ui->version->setText("Version 1.0.1.0");
+    ui->version->setText(QApplication::applicationVersion());
 
     connect(ui->buttonAboutQt, &QAbstractButton::clicked, qApp, &QApplication::aboutQt);
 }
