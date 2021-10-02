@@ -18,6 +18,7 @@ SOURCES += \
         $$PWD/WatcherGeneric.cpp \
 
 HEADERS += \
+        $$PWD/AtomicBool.hpp \
         $$PWD/Debug.hpp \
         $$PWD/DirWatcherGeneric.hpp \
         $$PWD/DirectorySnapshot.hpp \
