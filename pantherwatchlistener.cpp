@@ -26,7 +26,10 @@ void PantherWatchListener::handleFileAction(efsw::WatchID watchID, const std::st
     auto qfilename = QString::fromStdString(filename);
     if (m_lockFiles.contains(qfilename, Qt::CaseInsensitive) &&
        (action == efsw::Actions::Add || action == efsw::Actions::Modified)) {
-        QString path = QDir::toNativeSeparators(qdir + QDir::separator()) + qfilename;
+        if (qdir.lastIndexOf(QDir::separator()) != qdir.length() - 1) {
+            qdir += QDir::separator();
+        }
+        QString path = QDir::toNativeSeparators(qdir+ qfilename);
         QFile file(path);
         if (file.exists()) {
             bool success = true;
