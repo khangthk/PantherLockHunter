@@ -146,28 +146,29 @@ void MainWindow::onUpdateHunterStatus()
         m_statusIcon->setPixmap(pixmap);
         m_statusText->setText("Hunting");
 
-        if (!m_timer.isActive()) {
-            connect(&m_timer, &QTimer::timeout, [&](){
-                static int i = 0;
-                QString text = "Hunting";
-                switch (i++) {
-                case 0:
-                    text += " -\\-";
-                    break;
-                case 1:
-                    text += " -|-";
-                    break;
-                case 2:
-                    text += " -/-";
-                    break;
-                default:
-                    text += " —";
-                    i = 0;
-                    break;
-                }
-                m_statusText->setText(text);
-            });
+        auto fnSetAnimationText = [&]() {
+            static int i = 0;
+            QString text = "Hunting";
+            switch (i++) {
+            case 0:
+                text += " -\\-";
+                break;
+            case 1:
+                text += " -|-";
+                break;
+            case 2:
+                text += " -/-";
+                break;
+            default:
+                text += " —";
+                i = 0;
+                break;
+            }
+            m_statusText->setText(text);
+        };
 
+        if (!m_timer.isActive()) {
+            connect(&m_timer, &QTimer::timeout, fnSetAnimationText);
             m_timer.start(150);
         }
     } else {
