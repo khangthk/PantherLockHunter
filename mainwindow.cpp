@@ -4,6 +4,7 @@
 
 #include <QCloseEvent>
 #include <QMessageBox>
+#include <QPainter>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), m_timer(nullptr)
@@ -136,14 +137,13 @@ void MainWindow::onStartWatcher()
 
 void MainWindow::onUpdateHunterStatus()
 {
+    QColor iconColor = QColor(107, 190, 102); //green
+
     if (m_watcher->isRunning()) {
-        QPixmap pixmap;
         if (Setting::getWatchFolders().empty() || Setting::getLockFiles().empty()) {
-            pixmap = QPixmap(":/icons/yellow.svg").scaledToHeight(ui->statusbar->height() / 2);
-        } else {
-            pixmap = QPixmap(":/icons/green.svg").scaledToHeight(ui->statusbar->height() / 2);
+            iconColor = QColor(255, 160, 0); //yellow
         }
-        m_statusIcon->setPixmap(pixmap);
+
         m_statusText->setText("Hunting");
 
         auto fnSetAnimationText = [&]() {
@@ -174,11 +174,18 @@ void MainWindow::onUpdateHunterStatus()
     } else {
         m_timer.stop();
         disconnect(&m_timer, &QTimer::timeout, 0, 0);
-
-        QPixmap pixmap(QPixmap(":/icons/red.svg").scaledToHeight(ui->statusbar->height() / 2));
-        m_statusIcon->setPixmap(pixmap);
         m_statusText->setText("Stop");
+        iconColor = QColor(251, 0, 0); //red
     }
+
+    QPixmap iconPixmap(ui->statusbar->height() / 2, ui->statusbar->height() / 2);
+    iconPixmap.fill(Qt::transparent);
+    QPainter painter(&iconPixmap);
+    painter.setBrush(iconColor);
+    painter.setPen(Qt::transparent);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.drawEllipse(iconPixmap.rect());
+    m_statusIcon->setPixmap(iconPixmap);
 }
 
 void MainWindow::onUpdateTotalDeletedStatus()

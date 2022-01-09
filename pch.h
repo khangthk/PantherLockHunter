@@ -16,6 +16,7 @@
 #include <QMessageBox>
 #include <QMutex>
 #include <QObject>
+#include <QPainter>
 #include <QProgressBar>
 #include <QSettings>
 #include <QString>
